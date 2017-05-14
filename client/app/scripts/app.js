@@ -17,21 +17,23 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'config'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        templateUrl: 'views/account.html',
+        controller: 'AccountCtrl',
+        controllerAs: 'account'
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .controller('MainCtrl', ['$route', '$routeParams', '$location',
+    function MainCtrl($route, $routeParams, $location) {
+      this.$route = $route;
+      this.$location = $location;
+      this.$routeParams = $routeParams;
+  }]);
