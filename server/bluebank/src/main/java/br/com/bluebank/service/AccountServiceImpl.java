@@ -33,8 +33,8 @@ public class AccountServiceImpl implements AccountService {
 	private AccountHolderRepository accountHolderRepository;
 
 	@Override
-	public AccountJson transfer(TransactionJson transfer) {
-		LOG.debug("Processing transfer {}", transfer);
+	public AccountJson transfer(TransactionJson transactionJson) {
+		LOG.debug("Processing transfer {}", transactionJson);
 		
 		AccountId accountId = new AccountId();
 		accountId.setNumber(1);
@@ -46,14 +46,13 @@ public class AccountServiceImpl implements AccountService {
 		LOG.debug("Transaction: {}", transaction);
 		
 		AccountHolderId accountHolderId = new AccountHolderId();
-		accountHolderId.setAccountNumber(1);
-		accountHolderId.setAccountAgency(1);
+		accountHolderId.setAccount(account);
 		accountHolderId.setCpf("51271204452");
 		accountHolderId.setId(1L);
 		AccountHolder accountHolder = accountHolderRepository.findOne(accountHolderId);
 		LOG.debug("AccountHolder: {}", accountHolder);
 		
-		return new AccountJson(transfer.getAccountNumberFrom(), transfer.getAccountAgencyFrom(), BigDecimal.ZERO);
+		return new AccountJson(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom(), BigDecimal.ZERO);
 	}
 
 }

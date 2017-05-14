@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +22,15 @@ public class AccountHolder implements Serializable {
 	private Long id;
 	@Id
 	private String cpf;
+	
 	@Id
-	private Integer accountNumber;
-	@Id
-	private Integer accountAgency;
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="account_number", referencedColumnName="number"),
+		@JoinColumn(name="account_agency", referencedColumnName="agency")
+	})
+	private Account account;
+	
 	private String name;
 	private LocalDateTime creationDate;
 	
@@ -50,31 +58,24 @@ public class AccountHolder implements Serializable {
 	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
-	public Integer getAccountNumber() {
-		return accountNumber;
+	public Account getAccount() {
+		return account;
 	}
-	public void setAccountNumber(Integer accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-	public Integer getAccountAgency() {
-		return accountAgency;
-	}
-	public void setAccountAgency(Integer accountAgency) {
-		this.accountAgency = accountAgency;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	@Override
 	public String toString() {
-		return "AccountHolder [id=" + id + ", cpf=" + cpf + ", accountNumber=" + accountNumber + ", accountAgency="
-				+ accountAgency + ", name=" + name + ", creationDate=" + creationDate + "]";
+		return "AccountHolder [id=" + id + ", cpf=" + cpf + ", account=" + account + ", name=" + name
+				+ ", creationDate=" + creationDate + "]";
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((accountAgency == null) ? 0 : accountAgency.hashCode());
-		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+		result = prime * result + ((account == null) ? 0 : account.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
@@ -88,15 +89,10 @@ public class AccountHolder implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		AccountHolder other = (AccountHolder) obj;
-		if (accountAgency == null) {
-			if (other.accountAgency != null)
+		if (account == null) {
+			if (other.account != null)
 				return false;
-		} else if (!accountAgency.equals(other.accountAgency))
-			return false;
-		if (accountNumber == null) {
-			if (other.accountNumber != null)
-				return false;
-		} else if (!accountNumber.equals(other.accountNumber))
+		} else if (!account.equals(other.account))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
@@ -110,5 +106,6 @@ public class AccountHolder implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 }

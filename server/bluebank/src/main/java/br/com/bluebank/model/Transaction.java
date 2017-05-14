@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,10 +16,21 @@ public class Transaction {
 
 	@Id
 	private Long id;
-	private Integer accountNumberFrom;
-	private Integer accountAgencyFrom;
-	private Integer accountNumberTo;
-	private Integer accountAgencyTo;
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="account_number_from", referencedColumnName="number"),
+		@JoinColumn(name="account_agency_from", referencedColumnName="agency")
+	})
+	private Account accountFrom;
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="account_number_to", referencedColumnName="number"),
+		@JoinColumn(name="account_agency_to", referencedColumnName="agency")
+	})
+	private Account accountTo;
+	
 	private BigDecimal amount;
 	private LocalDateTime creationDate;
 	private String description;
@@ -45,36 +59,23 @@ public class Transaction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getAccountNumberFrom() {
-		return accountNumberFrom;
+	public Account getAccountFrom() {
+		return accountFrom;
 	}
-	public void setAccountNumberFrom(Integer accountNumberFrom) {
-		this.accountNumberFrom = accountNumberFrom;
+	public void setAccountFrom(Account accountFrom) {
+		this.accountFrom = accountFrom;
 	}
-	public Integer getAccountAgencyFrom() {
-		return accountAgencyFrom;
+	public Account getAccountTo() {
+		return accountTo;
 	}
-	public void setAccountAgencyFrom(Integer accountAgencyFrom) {
-		this.accountAgencyFrom = accountAgencyFrom;
-	}
-	public Integer getAccountNumberTo() {
-		return accountNumberTo;
-	}
-	public void setAccountNumberTo(Integer accountNumberTo) {
-		this.accountNumberTo = accountNumberTo;
-	}
-	public Integer getAccountAgencyTo() {
-		return accountAgencyTo;
-	}
-	public void setAccountAgencyTo(Integer accountAgencyTo) {
-		this.accountAgencyTo = accountAgencyTo;
+	public void setAccountTo(Account accountTo) {
+		this.accountTo = accountTo;
 	}
 	
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", accountNumberFrom=" + accountNumberFrom + ", accountAgencyFrom="
-				+ accountAgencyFrom + ", accountNumberTo=" + accountNumberTo + ", accountAgencyTo=" + accountAgencyTo
-				+ ", amount=" + amount + ", creationDate=" + creationDate + ", description=" + description + "]";
+		return "Transaction [id=" + id + ", accountFrom=" + accountFrom + ", accountTo=" + accountTo + ", amount="
+				+ amount + ", creationDate=" + creationDate + ", description=" + description + "]";
 	}
 	
 	@Override
@@ -100,7 +101,6 @@ public class Transaction {
 			return false;
 		return true;
 	}
-	
 	
 		
 }
