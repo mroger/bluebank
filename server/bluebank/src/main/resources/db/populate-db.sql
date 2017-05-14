@@ -9,3 +9,8 @@ INSERT INTO ACCOUNT_HOLDER (cpf, account_number, account_agency, name, creation_
 INSERT INTO ACCOUNT_HOLDER (cpf, account_number, account_agency, name, creation_date) VALUES ('43435392100', 1, 2, 'Alan', '2017-05-14 10:00:00');
 INSERT INTO ACCOUNT_HOLDER (cpf, account_number, account_agency, name, creation_date) VALUES ('84061237020', 2, 2, 'Berta', '2017-05-14 10:00:00');
 INSERT INTO ACCOUNT_HOLDER (cpf, account_number, account_agency, name, creation_date) VALUES ('82355099979', 1, 1, 'Rose', '2017-05-14 10:00:00');
+
+INSERT INTO TRANSACTION
+	(id, account_number_from, account_agency_from, account_number_to, account_agency_to, amount, creation_date, description)
+VALUES
+	(1, 1, 1, 2, 1, 10.0, '2017-05-14 11:30:00', 'Lunch');
