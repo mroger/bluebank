@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 public class Transaction {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne
@@ -35,6 +38,19 @@ public class Transaction {
 	private LocalDateTime creationDate;
 	private String description;
 	
+	public Transaction() { }
+	
+	public Transaction(Account accountFrom, Account accountTo, BigDecimal amount, LocalDateTime creationDate,
+			String description) {
+		this.accountFrom = accountFrom;
+		this.accountTo = accountTo;
+		this.amount = amount;
+		this.creationDate = creationDate;
+		this.description = description;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}

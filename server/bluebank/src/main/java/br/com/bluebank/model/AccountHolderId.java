@@ -10,6 +10,14 @@ public class AccountHolderId implements Serializable {
 	private String cpf;
 	private Account account;
 	
+	public AccountHolderId() { }
+	
+	public AccountHolderId(Long id, String cpf, Account account) {
+		this.id = id;
+		this.cpf = cpf;
+		this.account = account;
+	}
+
 	public Long getId() {
 		return id;
 	}

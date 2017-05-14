@@ -1,5 +1,7 @@
 package br.com.bluebank.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,7 @@ public class AccountController {
 	private AccountService accountService;
 
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
-	public AccountJson transfer(@RequestBody TransactionJson transaction) {
+	public AccountJson transfer(@Valid @RequestBody TransactionJson transaction) {
 		
 		return accountService.transfer(transaction);
 	}

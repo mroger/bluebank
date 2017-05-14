@@ -21,6 +21,18 @@ public class Account implements Serializable {
 	private Integer agency;
 	private BigDecimal balance;
 	
+	public Account() { }
+	
+	public Account(Integer number, Integer agency) {
+		this(number, agency, BigDecimal.ZERO);
+	}
+
+	public Account(Integer number, Integer agency, BigDecimal balance) {
+		this.number = number;
+		this.agency = agency;
+		this.balance = balance;
+	}
+
 	public Integer getNumber() {
 		return number;
 	}

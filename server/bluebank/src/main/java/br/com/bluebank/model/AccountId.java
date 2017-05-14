@@ -9,6 +9,13 @@ private static final long serialVersionUID = 1L;
 	private Integer number;
 	private Integer agency;
 	
+	public AccountId() { }
+	
+	public AccountId(Integer number, Integer agency) {
+		this.number = number;
+		this.agency = agency;
+	}
+
 	public Integer getNumber() {
 		return number;
 	}
