@@ -11,15 +11,15 @@ angular.module('bluebankApp')
   .service('accountService', ['$http', 'ENV', function ($http, ENV) {
 
     var self = {
-      'transfer': function() {
+      'transfer': function(transferData) {
         
         var request = {
-          accountNumberFrom: 1,
-          accountAgencyFrom: 1,
-          accountNumberTo: 2,
-          accountAgencyTo: 1,
-          amount: 10.0,
-          description: 'Transfer number one'
+          accountNumberFrom: transferData.accountFrom,
+          accountAgencyFrom: transferData.agencyFrom,
+          accountNumberTo: transferData.accountTo,
+          accountAgencyTo: transferData.agencyTo,
+          amount: transferData.amount,
+          description: transferData.description
         };
 
         $http

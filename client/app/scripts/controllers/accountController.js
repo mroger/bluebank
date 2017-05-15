@@ -8,12 +8,13 @@
  * Controller of the bluebankApp
  */
 angular.module('bluebankApp')
-  .controller('AccountCtrl', ['accountService', function (accountService) {
+  .controller('AccountCtrl', ['$scope', 'accountService', function ($scope, accountService) {
     var ctrl = this;
 
-    ctrl.transfer = function() {
+    ctrl.transfer = function(transferData) {
+      console.log(transferData);
       console.log('controller...');
-      accountService.transfer();
+      accountService.transfer(transferData);
     };
 
   }]);

@@ -1,3 +1,43 @@
 <div class="jumbotron">
-  <button type="button" class="btn btn-lg btn-success" ng-click="account.transfer()">Transfer</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row" align="left"><div class="col">Origin account:</div></div>
+        <form class="simple-form">
+          <label align="left">Agency number:<br />
+          <input type="text" ng-model="transferData.agencyFrom" /></label><br />
+          <label align="left">Account number:<br />
+          <input type="text" ng-model="transferData.accountFrom" /></label><br />
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="row" align="left"><div class="col">Destination account:</div></div>
+        <form class="simple-form">
+          <label align="left">Agency number:<br />
+          <input type="text" ng-model="transferData.agencyTo" /></label><br />
+          <label align="left">Account number:<br />
+          <input type="text" ng-model="transferData.accountTo" /></label><br />
+        </form>
+      </div>
+    </div>
+    <div class="row" align="left">
+      <div class="col">
+        <form class="simple-form">
+          <label align="left">Amount:<br />
+          <input type="text" ng-model="transferData.amount" /></label><br />
+        </form>
+      </div>
+      <div class="col">
+        <form class="simple-form">
+          <label align="left">Description:<br />
+          <input type="text" ng-model="transferData.description" /></label><br />
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-lg btn-success" ng-click="account.transfer(transferData)">Transfer</button>
+      </div>
+    </div>
+  </div>
 </div>
