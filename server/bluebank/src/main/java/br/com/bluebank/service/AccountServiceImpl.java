@@ -15,7 +15,6 @@ import br.com.bluebank.exception.EqualAccountsException;
 import br.com.bluebank.model.Account;
 import br.com.bluebank.model.AccountId;
 import br.com.bluebank.model.Transaction;
-import br.com.bluebank.model.json.AccountJson;
 import br.com.bluebank.model.json.TransactionJson;
 import br.com.bluebank.repository.AccountRepository;
 import br.com.bluebank.repository.TransactionRepository;
@@ -43,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Transactional
 	@Override
-	public AccountJson transfer(TransactionJson transactionJson) {
+	public Account transfer(TransactionJson transactionJson) {
 		LOG.debug("Processing transfer {}", transactionJson);
 		
 		AccountId accountIdFrom = new AccountId(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom());
@@ -90,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
 		
 		LOG.debug("Transaction: {}", transactionPersisted);
 		
-		return new AccountJson(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom(), accountFromPersisted.getBalance());
+		return accountFromPersisted;
 	}
 
 }

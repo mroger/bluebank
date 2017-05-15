@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bluebank.model.Account;
 import br.com.bluebank.model.json.AccountJson;
 import br.com.bluebank.model.json.TransactionJson;
 import br.com.bluebank.service.AccountService;
@@ -33,7 +34,9 @@ public class AccountController {
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
 	public AccountJson transfer(@Valid @RequestBody TransactionJson transaction) {
 		
-		return accountService.transfer(transaction);
+		Account account = accountService.transfer(transaction);
+		
+		return AccountJson.fromModel(account);
 	}
 	
 }

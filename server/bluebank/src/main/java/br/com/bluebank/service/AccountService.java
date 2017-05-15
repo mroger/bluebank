@@ -1,6 +1,6 @@
 package br.com.bluebank.service;
 
-import br.com.bluebank.model.json.AccountJson;
+import br.com.bluebank.model.Account;
 import br.com.bluebank.model.json.TransactionJson;
 
 /**
@@ -18,6 +18,6 @@ public interface AccountService {
 	 * @param transaction
 	 * @return Origin account with its new  balance  
 	 */
-	AccountJson transfer(TransactionJson transaction);
+	Account transfer(TransactionJson transaction);
 
 }

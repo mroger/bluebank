@@ -2,6 +2,8 @@ package br.com.bluebank.model.json;
 
 import java.math.BigDecimal;
 
+import br.com.bluebank.model.Account;
+
 /**
  * 
  * @author Marcos (mroger.oliveira@gmail.com)
@@ -37,6 +39,10 @@ public class AccountJson {
 	public String toString() {
 		return "AccountJson [accountNumber=" + accountNumber + ", accountAgency=" + accountAgency + ", balance="
 				+ balance + "]";
+	}
+
+	public static AccountJson fromModel(Account account) {
+		return new AccountJson(account.getNumber(), account.getAgency(), account.getBalance());
 	}
 	
 }
