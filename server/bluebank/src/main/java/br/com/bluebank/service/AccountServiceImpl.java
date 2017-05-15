@@ -1,6 +1,5 @@
 package br.com.bluebank.service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
@@ -45,38 +44,18 @@ public class AccountServiceImpl implements AccountService {
 	public Account transfer(TransactionJson transactionJson) {
 		LOG.debug("Processing transfer {}", transactionJson);
 		
-		AccountId accountIdFrom = new AccountId(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom());
-		Account accountFrom = accountRepository.findOne(accountIdFrom);
+		Account accountFrom = accountRepository.findOne(getAccountIdFrom(transactionJson));
 		LOG.debug("Account: {}", accountFrom);
 		
-		if (accountFrom == null) {
-			throw new AccountNotFoundException("Origin account not found");
-		}
-		
-		AccountId accountIdTo = new AccountId(transactionJson.getAccountNumberTo(), transactionJson.getAccountAgencyTo());
-		Account accountTo = accountRepository.findOne(accountIdTo);
+		Account accountTo = accountRepository.findOne(getAccountIdTo(transactionJson));
 		LOG.debug("Account: {}", accountTo);
 		
-		if (accountTo == null) {
-			throw new AccountNotFoundException("Destination account not found");
-		}
-		
-		if (accountFrom.equals(accountTo)) {
-			throw new EqualAccountsException("Origin and destination accounts are the same");
-		}
-		
-		if (accountFrom.getBalance().compareTo(transactionJson.getAmount()) < 0) {
-			throw new AccountNotEnoughFundsException("Origin account has insufficient funds to complete this transaction");
-		}
+		validateAccounts(transactionJson, accountFrom, accountTo);
 		
 		accountFrom.setBalance(accountFrom.getBalance().subtract(transactionJson.getAmount()));
 		Account accountFromPersisted = accountRepository.save(accountFrom);
 		
 		LOG.debug("Account: {}", accountFromPersisted);
-		
-		if (transactionJson.getAmount().equals(new BigDecimal("100.0"))) {
-			throw new RuntimeException();
-		}
 		
 		accountTo.setBalance(accountTo.getBalance().add(transactionJson.getAmount()));
 		Account accountToPersisted = accountRepository.save(accountTo);
@@ -90,6 +69,32 @@ public class AccountServiceImpl implements AccountService {
 		LOG.debug("Transaction: {}", transactionPersisted);
 		
 		return accountFromPersisted;
+	}
+
+	private void validateAccounts(TransactionJson transactionJson, Account accountFrom, Account accountTo) {
+		if (accountFrom == null) {
+			throw new AccountNotFoundException("Origin account not found");
+		}
+		
+		if (accountTo == null) {
+			throw new AccountNotFoundException("Destination account not found");
+		}
+		
+		if (accountFrom.equals(accountTo)) {
+			throw new EqualAccountsException("Origin and destination accounts are the same");
+		}
+		
+		if (accountFrom.getBalance().compareTo(transactionJson.getAmount()) < 0) {
+			throw new AccountNotEnoughFundsException("Origin account has insufficient funds to complete this transaction");
+		}
+	}
+
+	private AccountId getAccountIdFrom(TransactionJson transactionJson) {
+		return new AccountId(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom());
+	}
+
+	private AccountId getAccountIdTo(TransactionJson transactionJson) {
+		return new AccountId(transactionJson.getAccountNumberTo(), transactionJson.getAccountAgencyTo());
 	}
 
 }
