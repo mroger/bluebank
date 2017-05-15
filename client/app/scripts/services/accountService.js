@@ -8,7 +8,7 @@
  * Service in the bluebankApp.
  */
 angular.module('bluebankApp')
-  .service('accountService', ['$http', 'ENV', function ($http, ENV) {
+  .service('accountService', ['$http', 'ENV', '$log', function ($http, ENV, $log) {
 
     var self = {
       'transfer': function(transferData) {
@@ -26,10 +26,10 @@ angular.module('bluebankApp')
           .post(ENV.accountServiceURL + '/accounts/transfer', request)
           .then(
             function(response) {
-              console.log(response);
+              $log.debug(response);
             },
             function(response) {
-              console.log(response);
+              $log.debug(response);
             });
       }
     };
