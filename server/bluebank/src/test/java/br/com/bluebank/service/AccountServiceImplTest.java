@@ -14,6 +14,11 @@ import br.com.bluebank.model.json.TransactionJson;
 import br.com.bluebank.repository.AccountHolderRepository;
 import br.com.bluebank.repository.TransactionRepository;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ */
 public class AccountServiceImplTest {
 	
 	private static final String DESCRIPTION_1 = "New description";

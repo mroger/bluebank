@@ -15,6 +15,12 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ * 
+ * Filter to resolve CORS issue, responding to OPTIONS request
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class CorsFilter implements Filter {

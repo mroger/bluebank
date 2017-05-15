@@ -2,8 +2,12 @@ package br.com.bluebank.model.json;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Account DTO
+ */
 public class AccountJson {
 
 	private Integer accountNumber;

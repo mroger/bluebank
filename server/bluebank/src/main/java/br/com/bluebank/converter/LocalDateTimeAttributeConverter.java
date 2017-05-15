@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Converter between the new LocalDateTime and Timestamp
+ */
 @Converter(autoApply = true)
 public class LocalDateTimeAttributeConverter implements AttributeConverter<LocalDateTime, Timestamp> {
 

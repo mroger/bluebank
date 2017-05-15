@@ -7,6 +7,12 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ * 
+ * Transaction DTO
+ */
 public class TransactionJson {
 
 	@NotNull

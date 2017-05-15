@@ -12,6 +12,12 @@ import br.com.bluebank.model.json.AccountJson;
 import br.com.bluebank.model.json.TransactionJson;
 import br.com.bluebank.service.AccountService;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Accounts controller
+ */
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
@@ -19,6 +25,11 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
+	/**
+	 * 
+	 * @param transaction
+	 * @return origin and destination accounts with their new balances
+	 */
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
 	public AccountJson transfer(@Valid @RequestBody TransactionJson transaction) {
 		

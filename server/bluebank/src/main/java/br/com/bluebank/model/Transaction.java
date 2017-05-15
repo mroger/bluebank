@@ -12,6 +12,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Transaction entity
+ */
 @Entity
 @Table(name="transaction")
 public class Transaction {
@@ -48,8 +54,6 @@ public class Transaction {
 		this.creationDate = creationDate;
 		this.description = description;
 	}
-
-
 
 	public Long getId() {
 		return id;

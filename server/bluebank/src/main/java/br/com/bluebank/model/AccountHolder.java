@@ -11,6 +11,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Entity AccountHolder
+ */
 @Entity
 @Table(name="account_holder")
 @IdClass(AccountHolderId.class)

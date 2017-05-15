@@ -5,6 +5,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.bluebank.model.Transaction;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Transaction repositpry
+ * Transaction read only by default 
+ */
 @Transactional(readOnly = true)
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 

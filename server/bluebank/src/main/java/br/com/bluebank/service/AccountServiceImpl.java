@@ -13,16 +13,19 @@ import br.com.bluebank.exception.AccountNotEnoughFundsException;
 import br.com.bluebank.exception.AccountNotFoundException;
 import br.com.bluebank.exception.EqualAccountsException;
 import br.com.bluebank.model.Account;
-import br.com.bluebank.model.AccountHolder;
-import br.com.bluebank.model.AccountHolderId;
 import br.com.bluebank.model.AccountId;
 import br.com.bluebank.model.Transaction;
 import br.com.bluebank.model.json.AccountJson;
 import br.com.bluebank.model.json.TransactionJson;
-import br.com.bluebank.repository.AccountHolderRepository;
 import br.com.bluebank.repository.AccountRepository;
 import br.com.bluebank.repository.TransactionRepository;
 
+/**
+ * Service implementation for accounts
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 	
@@ -34,9 +37,10 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 	
-	@Autowired
-	private AccountHolderRepository accountHolderRepository;
-
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.bluebank.service.AccountService#transfer(br.com.bluebank.model.json.TransactionJson)
+	 */
 	@Transactional
 	@Override
 	public AccountJson transfer(TransactionJson transactionJson) {

@@ -2,9 +2,15 @@ package br.com.bluebank.model;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Account id
+ */
 public class AccountId implements Serializable {
 
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	private Integer number;
 	private Integer agency;

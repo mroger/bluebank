@@ -8,6 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Marcos (mroger.oliveira@gmail.com)
+ *
+ * Entity account
+ */
 @Entity
 @Table(name="account")
 @IdClass(AccountId.class)
