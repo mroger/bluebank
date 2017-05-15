@@ -16,9 +16,9 @@ angular.module('bluebankApp')
         var request = {
           accountNumberFrom: 1,
           accountAgencyFrom: 1,
-          accountNumberTo: 1,
+          accountNumberTo: 2,
           accountAgencyTo: 1,
-          amount: 100.0,
+          amount: 10.0,
           description: 'Transfer number one'
         };
 
