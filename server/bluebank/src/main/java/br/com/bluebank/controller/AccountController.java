@@ -12,6 +12,7 @@ import br.com.bluebank.model.Account;
 import br.com.bluebank.model.json.AccountJson;
 import br.com.bluebank.model.json.TransactionJson;
 import br.com.bluebank.service.AccountService;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 
@@ -27,10 +28,15 @@ public class AccountController {
 	private AccountService accountService;
 
 	/**
+	 * Transfers funds from one account to another.
+	 * Validation to guarantee consistency are applied.
 	 * 
 	 * @param transaction
 	 * @return origin and destination accounts with their new balances
 	 */
+	@ApiOperation(
+            value = "Transfer funds from one account to the other",
+            nickname = "transfer")
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
 	public AccountJson transfer(@Valid @RequestBody TransactionJson transaction) {
 		
