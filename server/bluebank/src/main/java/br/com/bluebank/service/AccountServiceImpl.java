@@ -41,37 +41,37 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Transactional
 	@Override
-	public Account transfer(TransactionJson transactionJson) {
+	public Account transfer(final TransactionJson transactionJson) {
 		LOG.debug("Processing transfer {}", transactionJson);
 		
-		Account accountFrom = accountRepository.findOne(getAccountIdFrom(transactionJson));
-		LOG.debug("Account: {}", accountFrom);
+		Account accountOrigin = accountRepository.findOne(getAccountIdFrom(transactionJson));
+		LOG.debug("Account: {}", accountOrigin);
 		
-		Account accountTo = accountRepository.findOne(getAccountIdTo(transactionJson));
-		LOG.debug("Account: {}", accountTo);
+		Account accountDestination = accountRepository.findOne(getAccountIdTo(transactionJson));
+		LOG.debug("Account: {}", accountDestination);
 		
-		validateAccounts(transactionJson, accountFrom, accountTo);
+		validateAccounts(transactionJson, accountOrigin, accountDestination);
 		
-		accountFrom.setBalance(accountFrom.getBalance().subtract(transactionJson.getAmount()));
-		Account accountFromPersisted = accountRepository.save(accountFrom);
+		accountOrigin.setBalance(accountOrigin.getBalance().subtract(transactionJson.getAmount()));
+		Account accountOriginPersisted = accountRepository.save(accountOrigin);
 		
-		LOG.debug("Account: {}", accountFromPersisted);
+		LOG.debug("Account: {}", accountOriginPersisted);
 		
-		accountTo.setBalance(accountTo.getBalance().add(transactionJson.getAmount()));
-		Account accountToPersisted = accountRepository.save(accountTo);
+		accountDestination.setBalance(accountDestination.getBalance().add(transactionJson.getAmount()));
+		Account accountToPersisted = accountRepository.save(accountDestination);
 		
 		LOG.debug("Account: {}", accountToPersisted);
 		
 		Transaction transaction = new Transaction(
-				accountFrom, accountTo, transactionJson.getAmount(), LocalDateTime.now(), transactionJson.getDescription());
+				accountOrigin, accountDestination, transactionJson.getAmount(), LocalDateTime.now(), transactionJson.getDescription());
 		Transaction transactionPersisted = transactionRepository.save(transaction);
 		
 		LOG.debug("Transaction: {}", transactionPersisted);
 		
-		return accountFromPersisted;
+		return accountOriginPersisted;
 	}
 
-	private void validateAccounts(TransactionJson transactionJson, Account accountFrom, Account accountTo) {
+	private void validateAccounts(final TransactionJson transactionJson, final Account accountFrom, final Account accountTo) {
 		if (accountFrom == null) {
 			throw new AccountNotFoundException("Origin account not found");
 		}
@@ -89,11 +89,11 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
-	private AccountId getAccountIdFrom(TransactionJson transactionJson) {
+	private AccountId getAccountIdFrom(final TransactionJson transactionJson) {
 		return new AccountId(transactionJson.getAccountNumberFrom(), transactionJson.getAccountAgencyFrom());
 	}
 
-	private AccountId getAccountIdTo(TransactionJson transactionJson) {
+	private AccountId getAccountIdTo(final TransactionJson transactionJson) {
 		return new AccountId(transactionJson.getAccountNumberTo(), transactionJson.getAccountAgencyTo());
 	}
 
