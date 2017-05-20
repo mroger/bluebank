@@ -157,7 +157,9 @@ public class AccountServiceImplTest {
 		Account origin = accountCaptor.getAllValues().get(0);
 		Account destination = accountCaptor.getAllValues().get(1);
 		
-		MatcherAssert.assertThat(origin.getBalance(), Matchers.equalTo(new BigDecimal("7.25")));
-		MatcherAssert.assertThat(destination.getBalance(), Matchers.equalTo(new BigDecimal("28.50")));
+		BigDecimal newOriginAccountBalance = Account2.BALANCE.subtract(Transaction2.AMOUNT);
+		BigDecimal newDestinationAccountBalance = Account3.BALANCE.add(Transaction2.AMOUNT);
+		MatcherAssert.assertThat(origin.getBalance(), Matchers.equalTo(newOriginAccountBalance));
+		MatcherAssert.assertThat(destination.getBalance(), Matchers.equalTo(newDestinationAccountBalance));
 	}
 }
