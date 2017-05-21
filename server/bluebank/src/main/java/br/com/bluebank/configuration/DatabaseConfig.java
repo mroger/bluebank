@@ -28,4 +28,13 @@ public class DatabaseConfig {
 		return db;
 	}
 	
+//	https://www.mkyong.com/spring/spring-embedded-database-examples/
+//	@PostConstruct
+//	public void startDBManager() {
+//
+//		//hsqldb
+//		DatabaseManagerSwing.main(new String[] { "--url", "jdbc:hsqldb:mem:testdb", "--user", "sa", "--password", "" });
+//
+//	}
+	
 }
