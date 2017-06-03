@@ -34,3 +34,9 @@ coverage
 
 # nyc test coverage
 .nyc_output
+
+# Node
+data/
+logs/
+node_modules/
+
