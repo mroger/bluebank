@@ -11,18 +11,22 @@ let router = () => {
             if (!req.body.number)
                 return res.status(400).json('Bad Request - number is required.');
             
-            Account.post(req.body.number, req.body.agency, req.body)
+            Account.create(req.body)
             .then(account => {
                 res.location('/accounts/' + account._id);
                 return res.status(201).json(account);
             })
-            .catch(AccountError, error => {
-                logger.debug('AccountError occurred', error);
-                res.location('/accounts/' + error.extra.id);
-                return res.status(409).json(error.extra);
-            })
             .catch(error => {
-                if (error) return res.status(500).json('Internal Server Error');
+                logger.error('An error creating account has occurred', error);
+                if (error.name === 'MongoError' && error.code === 11000) {
+                    return res.status(409).json({
+                        number: req.body.number,
+                        agency: req.body.agency,
+                        message: 'Account already exists'
+                    });
+                } else {
+                    return res.status(500).json('Internal Server Error');
+                };
             });
         });
 
